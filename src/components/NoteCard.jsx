@@ -1,10 +1,14 @@
-import { useState, useContext, memo } from 'react'
+import { useState, useContext, useEffect, memo } from 'react'
 import { SettingsContext } from './SettingsContext.jsx'
 
 function NoteCard({ id, title, body, onDelete }) {
   const [isExpanded, setIsExpanded] = useState(false)
-  const { largeText } = useContext(SettingsContext)
-
+  const { largeText, setLargeText } = useContext(SettingsContext)
+  
+  useEffect(() => {
+    localStorage.getItem('largeText') === 'true' ? setLargeText(true) : setLargeText(false)
+  }, [])
+  
   return (
     <div>
       <h3
