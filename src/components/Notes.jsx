@@ -21,6 +21,16 @@ function Notes() {
   });
   const [newNote, setNewNote] = useState({ title: '', body: '' })
   const [searchTerm, setSearchTerm] = useState('')
+  
+
+  useEffect(() => {
+      const id = setTimeout(() => {
+        localStorage.setItem('draft', JSON.stringify(newNote))
+        console.log('draft saved: ', newNote)
+      }, 1000)
+
+      return () => clearTimeout(id)
+  }, [newNote])
 
   useEffect(() => {
      localStorage.setItem('notes', JSON.stringify(notes))
